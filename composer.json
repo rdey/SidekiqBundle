@@ -1,0 +1,21 @@
+{
+    "name": "redeye/sidekiq-bundle",
+    "description": "Bundle for integrating musicglue/sidekiq-job-pusher into Symfony",
+    "type": "symfony-bundle",
+    "keywords": ["sidekiq", "queue"],
+    "authors": [
+        {
+            "name": "Redeye AB",
+            "email": "info@redeye.se"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "symfony/symfony": "2.3.*",
+        "musicglue/sidekiq-job-pusher": "dev-master",
+    },
+    "target-dir": "Redeye/SidekiqBundle",
+    "autoload": {
+        "psr-0": { "Redeye\\SidekiqBundle": "" }
+    }
+}

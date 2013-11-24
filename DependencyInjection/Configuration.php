@@ -22,7 +22,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-            ->scalarNode('namespace')->isRequired()->end()
+            ->scalarNode('namespace')->defaultValue('sidekiq')->end()
             ->arrayNode('redis')
                 ->children()
                 ->scalarNode('service')->defaultNull()->end()
@@ -30,6 +30,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('port')->defaultValue(6379)->end()
                 ->scalarNode('database')->defaultNull()->end()
                 ->end()
+                ->addDefaultsIfNotSet()
             ->end()
             ->end();
 

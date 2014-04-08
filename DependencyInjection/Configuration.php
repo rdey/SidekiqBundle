@@ -22,12 +22,12 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-            ->scalarNode('namespace')->defaultValue('sidekiq')->end()
+            ->scalarNode('namespace')->isRequired()->end()
             ->arrayNode('redis')
                 ->children()
-                ->scalarNode('service')->defaultNull()->end()
                 ->scalarNode('host')->defaultValue('127.0.0.1')->end()
                 ->scalarNode('port')->defaultValue(6379)->end()
+                ->scalarNode('password')->defaultNull()->end()
                 ->scalarNode('database')->defaultNull()->end()
                 ->end()
                 ->addDefaultsIfNotSet()

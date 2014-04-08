@@ -10,7 +10,7 @@
     </parameters>
 
     <services>
-        <service id="redeye_sidekiq.predis.real" class="%redeye_sidekiq.predis.class%" public="false">
+        <service id="redeye_sidekiq.predis" class="%redeye_sidekiq.predis.class%" public="false">
             <argument />
         </service>
 

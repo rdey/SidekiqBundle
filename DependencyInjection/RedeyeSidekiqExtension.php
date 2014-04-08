@@ -22,22 +22,34 @@ class RedeyeSidekiqExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new Loader\XmlFileLoader(
+            $container,
+            new FileLocator(__DIR__.'/../Resources/config')
+        );
         $loader->load('services.xml');
 
         $pusher = $container->getDefinition('redeye_sidekiq');
         $pusher->replaceArgument(1, $config['namespace']);
 
-        if ($config['redis']['service']) {
-            $container->setAlias('redeye_sidekiq.predis', $config['redis']['service']);
-        } else {
-            $predis = $container->getDefinition('redeye_sidekiq.predis.real');
-            $predis->replaceArgument(0, [
-                'host' => $config['redis']['host'],
-                'port' => $config['redis']['port'],
-                'database' => $config['redis']['database'],
-            ]);
-            $container->setAlias('redeye_sidekiq.predis', 'redeye_sidekiq.predis.real');
+        $this->configurePredis(
+            $container->getDefinition('redeye_sidekiq.predis'),
+            $config['redis']
+        );
+    }
+
+    private function configurePredis($predis, $config)
+    {
+        $argument = [
+            'host' => $config['host'],
+            'port' => $config['port'],
+        ];
+        if (isset($config['password'])) {
+            $argument['password'] = $config['password'];
         }
+        if (isset($config['database'])) {
+            $argument['database'] = $config['database'];
+        }
+
+        $predis->replaceArgument(0, $argument);
     }
 }

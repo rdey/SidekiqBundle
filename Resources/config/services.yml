@@ -1,0 +1,13 @@
+parameters:
+    redeye_sidekiq.predis.class: Predis\Client
+    redeye_sidekiq.pusher_client.class: SidekiqJobPusher\Client
+
+services:
+    redeye_sidekiq.predis:
+        class: %redeye_sidekiq.predis.class%
+        public: false
+        arguments: [""]
+
+    redeye_sidekiq:
+        class: %redeye_sidekiq.pusher_client.class%
+        arguments: ["@redeye_sidekiq.predis", ""]

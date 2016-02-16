@@ -22,11 +22,11 @@ class RedeyeSidekiqExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new Loader\XmlFileLoader(
+        $loader = new Loader\YamlFileLoader(
             $container,
             new FileLocator(__DIR__.'/../Resources/config')
         );
-        $loader->load('services.xml');
+        $loader->load('services.yml');
 
         $pusher = $container->getDefinition('redeye_sidekiq');
         $pusher->replaceArgument(1, $config['namespace']);

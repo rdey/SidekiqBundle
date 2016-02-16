@@ -1,0 +1,12 @@
+build:
+    environment:
+        php:
+            version: 7.0
+    dependencies:
+        before:
+            - mv /home/scrutinizer/.phpenv/versions/7.0.0/etc/conf.d/xdebug.ini ~/
+        after:
+            - mv ~/xdebug.ini /home/scrutinizer/.phpenv/versions/7.0.0/etc/conf.d/
+    tests:
+        override:
+            - vendor/bin/phpunit

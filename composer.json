@@ -17,5 +17,9 @@
     "target-dir": "Redeye/SidekiqBundle",
     "autoload": {
         "psr-0": { "Redeye\\SidekiqBundle": "" }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.2",
+        "mockery/mockery": "^0.9.4"
     }
 }

@@ -11,7 +11,7 @@
     ],
     "require": {
         "php": ">=5.4",
-        "symfony/symfony": "~2.3",
+        "symfony/symfony": "~2.3|~3.0",
         "musicglue/sidekiq-job-pusher": "dev-master"
     },
     "target-dir": "Redeye/SidekiqBundle",

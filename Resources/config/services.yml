@@ -4,10 +4,10 @@ parameters:
 
 services:
     redeye_sidekiq.predis:
-        class: %redeye_sidekiq.predis.class%
+        class: "%redeye_sidekiq.predis.class%"
         public: false
         arguments: [""]
 
     redeye_sidekiq:
-        class: %redeye_sidekiq.pusher_client.class%
+        class: "%redeye_sidekiq.pusher_client.class%"
         arguments: ["@redeye_sidekiq.predis", ""]

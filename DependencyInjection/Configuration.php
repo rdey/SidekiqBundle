@@ -4,6 +4,7 @@ namespace Redeye\SidekiqBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Symfony\Component\ExpressionLanguage\Expression;
 
 /**
  * This is the class that validates and merges configuration from your app/config files
@@ -25,12 +26,23 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('namespace')->isRequired()->end()
             ->arrayNode('redis')
                 ->children()
-                ->scalarNode('host')->defaultValue('127.0.0.1')->end()
-                ->scalarNode('port')->defaultValue(6379)->end()
-                ->scalarNode('password')->defaultNull()->end()
-                ->scalarNode('database')->defaultNull()->end()
+                    ->arrayNode('dsn')
+                        ->beforeNormalization()
+                            ->ifString()
+                            ->then(function ($v) { return array('scalar' => $v); })
+                        ->end()
+                        ->children()
+                            ->scalarNode('scalar')->end()
+                            ->variableNode('expression')
+                                ->beforeNormalization()
+                                    ->ifString()
+                                    ->then(function ($v) { return new Expression($v); })
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->isRequired()
+                    ->end()
                 ->end()
-                ->addDefaultsIfNotSet()
             ->end()
             ->end();
 

@@ -31,25 +31,15 @@ class RedeyeSidekiqExtension extends Extension
         $pusher = $container->getDefinition('redeye_sidekiq');
         $pusher->replaceArgument(1, $config['namespace']);
 
-        $this->configurePredis(
-            $container->getDefinition('redeye_sidekiq.predis'),
-            $config['redis']
-        );
-    }
-
-    private function configurePredis($predis, $config)
-    {
-        $argument = [
-            'host' => $config['host'],
-            'port' => $config['port'],
-        ];
-        if (isset($config['password'])) {
-            $argument['password'] = $config['password'];
-        }
-        if (isset($config['database'])) {
-            $argument['database'] = $config['database'];
+        if ($config['redis']['dsn']['expression']) {
+            $dsn = $config['redis']['dsn']['expression'];
+        } else {
+            $dsn = $config['redis']['dsn']['scalar'];
         }
 
-        $predis->replaceArgument(0, $argument);
+        $container
+            ->getDefinition('redeye_sidekiq.predis')
+            ->replaceArgument(0, $dsn)
+        ;
     }
 }

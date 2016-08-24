@@ -8,6 +8,6 @@ services:
     redeye_sidekiq:
         class: SidekiqJobPusher\Client
         arguments:
-            - @redeye_sidekiq.predis
+            - "@redeye_sidekiq.predis"
             - ~
 

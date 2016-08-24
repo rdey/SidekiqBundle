@@ -1,5 +1,5 @@
 imports:
-    - { resource: ../Resources/config/services.yml }
+    - { resource: "../Resources/config/services.yml" }
 
 parameters:
     kernel.secret: secret

@@ -12,7 +12,7 @@
     "require": {
         "php": ">=5.4",
         "symfony/symfony": "~2.3|~3.0",
-        "musicglue/sidekiq-job-pusher": "dev-master"
+        "redeye/sidekiq-job-pusher": "^1.0"
     },
     "target-dir": "Redeye/SidekiqBundle",
     "autoload": {
@@ -26,5 +26,8 @@
         "branch-alias": {
             "dev-dev": "2.0.x-dev"
         }
-    }
+    },
+    "repositories": [
+        { "type": "composer", "url": "https://toran.rdey.se/repo/private/" }
+    ]
 }

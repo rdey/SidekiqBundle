@@ -1,8 +1,10 @@
 imports:
-    - { resource: ../Resources/config/services.yml }
+    - { resource: "../Resources/config/services.yml" }
 
 parameters:
     kernel.secret: secret
 
 redeye_sidekiq:
     namespace: redeye
+    redis:
+      dsn: redis://localhost

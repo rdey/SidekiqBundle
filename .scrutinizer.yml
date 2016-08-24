@@ -1,7 +1,7 @@
 build:
     environment:
         php:
-            version: 7.0
+            version: "7.0"
     dependencies:
         before:
             - mv /home/scrutinizer/.phpenv/versions/7.0.0/etc/conf.d/xdebug.ini ~/

@@ -6,3 +6,5 @@ parameters:
 
 redeye_sidekiq:
     namespace: redeye
+    redis:
+      dsn: redis://localhost

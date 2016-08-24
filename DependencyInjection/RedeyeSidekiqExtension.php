@@ -31,7 +31,7 @@ class RedeyeSidekiqExtension extends Extension
         $pusher = $container->getDefinition('redeye_sidekiq');
         $pusher->replaceArgument(1, $config['namespace']);
 
-        if ($config['redis']['dsn']['expression']) {
+        if (isset($config['redis']['dsn']['expression']) && $config['redis']['dsn']['expression']) {
             $dsn = $config['redis']['dsn']['expression'];
         } else {
             $dsn = $config['redis']['dsn']['scalar'];

@@ -33,21 +33,25 @@ class ContainerTest extends WebTestCase
 
         $data = Yaml::parse($file);
 
-        foreach (@$data['services'] ?: [] as $service => $definition) {
-            if (
-                (!isset($definition['abstract']) && !isset($definition['public'])) ||
-                (isset($definition['abstract']) && $definition['abstract'] != true) ||
-                (isset($definition['public']) && $definition['public'] != false)
-            ) {
-                $services[] = $service;
+        if (isset($data['services'])) {
+            foreach ($data['services'] ?: [] as $service => $definition) {
+                if (
+                    (!isset($definition['abstract']) && !isset($definition['public'])) ||
+                    (isset($definition['abstract']) && $definition['abstract'] != true) ||
+                    (isset($definition['public']) && $definition['public'] != false)
+                ) {
+                    $services[] = $service;
+                }
             }
         }
 
-        foreach (@$data['imports'] ?: [] as $import) {
-            $services = array_merge(
-                $services,
-                $this->extractServices(dirname($file).'/'.$import['resource'])
-            );
+        if (isset($data['imports'])) {
+            foreach ($data['imports'] ?: [] as $import) {
+                $services = array_merge(
+                    $services,
+                    $this->extractServices(dirname($file).'/'.$import['resource'])
+                );
+            }
         }
 
         return $services;

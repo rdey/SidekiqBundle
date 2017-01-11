@@ -1,7 +1,7 @@
 services:
     redeye_sidekiq.predis:
         class: Predis\Client
-        public: false
+        public: true
         arguments:
             - ~ # dsn
 
